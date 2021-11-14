@@ -6,6 +6,7 @@ import './index.css';
 import { IconDatabase, IconClock, IconTransition, IconBlockChain, IconShard, IconNode } from './components';
 
 const { Row, Col } = Grid;
+
 const originRate = Math.floor(Math.random() * 500) + 3000;
 const originSize = Math.floor(Math.random() * 2000) + 1000;
 const originBlockNum = Math.floor(Math.random() * 10000000);
