@@ -1,4 +1,4 @@
-const { override, addWebpackAlias, addDecoratorsLegacy } = require("customize-cra")
+const { override, addWebpackAlias, addDecoratorsLegacy, addPostcssPlugins } = require("customize-cra")
 const path = require('path')
 
 module.exports = override(
@@ -7,4 +7,5 @@ module.exports = override(
     // "@common": path.resolve(__dirname, "src/common"),
   }),
   addDecoratorsLegacy(),
+  addPostcssPlugins([require("tailwindcss"), require("autoprefixer")]),
 );
