@@ -2,14 +2,23 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Input, Statistic,} from '@arco-design/web-react';
 import ReactECharts, {EChartsInstance} from 'echarts-for-react';
 import {IconArrowFall, IconSearch} from '@arco-design/web-react/icon';
+import BusinessOverview from "@/pages/home/components/BusinessOverview";
 
-const Home = ({ rate = 2000, max = 15, }) => {
+const Home = ({ rate = 3500, max = 50, }) => {
   const [source, setSource] = useState([
-    { timestamp: 1, transactionsCount: 823, id: '152393'},
-    { timestamp: 2, transactionsCount: 235, id: '152394'},
-    { timestamp: 3, transactionsCount: 1042, id: '152395'},
-    { timestamp: 4, transactionsCount: 988, id: '152396'},
+    { timestamp: 1, transactionsCount: 75, id: '152393'},
+    { timestamp: 2, transactionsCount: 75, id: '152394'},
+    { timestamp: 3, transactionsCount: 75, id: '152395'},
+    { timestamp: 4, transactionsCount: 75, id: '152396'},
+    { timestamp: 5, transactionsCount: 75, id: '152396'},
+    { timestamp: 6, transactionsCount: 80, id: '152396'},
+    { timestamp: 7, transactionsCount: 46, id: '152396'},
+    { timestamp: 8, transactionsCount: 77, id: '152396'},
+    { timestamp: 9, transactionsCount: 84, id: '152396'},
+    { timestamp: 10, transactionsCount: 34, id: '152396'},
   ]);
+  const [boVisibility, setBoVisibility] = useState(true);
+  const [time, setTime] = useState(1);
   const barChartRef = useRef<EChartsInstance>(null);
 
   const option = {
@@ -22,6 +31,9 @@ const Home = ({ rate = 2000, max = 15, }) => {
       realtimeSort: true,
       animationDuration: 300,
       animationDurationUpdate: 300,
+      axisLabel: {
+        show: false,
+      },
       max: function (value: { max: number; }) {
         return value.max;
       },
@@ -31,6 +43,7 @@ const Home = ({ rate = 2000, max = 15, }) => {
     },
     yAxis: {
       max: 'dataMax', // 用数据的最大值作为 Y 轴最大值
+      show: false, // TODO
     },
     series: [
       {
@@ -58,8 +71,6 @@ const Home = ({ rate = 2000, max = 15, }) => {
     animationEasingUpdate: 'linear'
   };
 
-
-
   useEffect(() => {
     const mockUpdateSource = () => {
       const lastLatest = source[source.length - 1];
@@ -67,7 +78,7 @@ const Home = ({ rate = 2000, max = 15, }) => {
         ...source,
         {
           timestamp: lastLatest.timestamp + 1,
-          transactionsCount: Math.round(Math.random() * 400),
+          transactionsCount: 20 + Math.round(Math.random() * 100),
           id: String(Number(lastLatest.id) + 1),
         },
       ];
@@ -80,6 +91,7 @@ const Home = ({ rate = 2000, max = 15, }) => {
         },
       });
       setSource(newSource);
+      // setTime(0);
     }
 
     const intervalId = setInterval(mockUpdateSource, rate);
@@ -88,11 +100,28 @@ const Home = ({ rate = 2000, max = 15, }) => {
     }
   }, [rate, max, source]);
 
+  useEffect(() => {
+    const updateTime = () => {
+      // setTime(time + 1);
+    }
+
+    const intervalId = setInterval(updateTime, 1000);
+    return () => {
+      clearInterval(intervalId);
+    }
+  }, []);
+
   return (
     <div
-      className="container mx-auto mt-36 max-w-screen-xl flex flex-col justify-between items-center gap-9"
+      className="container mx-auto mt-18 max-w-screen-xl flex flex-col justify-between items-center gap-9"
     >
-
+      {
+        boVisibility && (
+          <div className="rounded-lg mt-12">
+            <BusinessOverview />
+          </div>
+        )
+      }
       <div>
         <div className={'text-blue-800 text-4xl font-extrabold'}>
           Ethereum Lite Explorer
@@ -125,7 +154,7 @@ const Home = ({ rate = 2000, max = 15, }) => {
         />
         <Statistic
           title='TIME'
-          value={'1 minute ago'}
+          value={time + 'min ago'}
           suffix={<IconArrowFall style={{ color: '#0fbf60' }} />}
         />
         <Statistic

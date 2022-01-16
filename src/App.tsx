@@ -6,7 +6,7 @@ import { Layout } from '@arco-design/web-react';
 import Router from './router';
 import '@arco-design/web-react/dist/css/arco.css';
 import './App.css'; // 在 @arco-design 后 import 保证覆盖
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/pages/home/components/Sidebar'; // TODO
 
 const { Sider, Content } = Layout;
 
@@ -20,10 +20,10 @@ function App() {
           <Route
             path="/"
             render={() => (
-              <Layout className={'bg-gray-50'} style={{ height: '840px' }}>
+              <Layout className={'bg-gray-50'} style={{ height: '1200px' }}>
                 <Layout>
-                  <Sider>
-                    <Sidebar />
+                  <Sider collapsed={true}>
+                     <Sidebar />
                   </Sider>
                   <Content>
                     <Router />
