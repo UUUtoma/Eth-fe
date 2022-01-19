@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## dependency
 
-1. node
+1. node 16.13.1
 2. yarn
 
 ## 运行方法
