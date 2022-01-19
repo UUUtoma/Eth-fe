@@ -17,7 +17,7 @@ const Home = ({ rate = 3500, max = 50, }) => {
     { timestamp: 9, transactionsCount: 84, id: '152396'},
     { timestamp: 10, transactionsCount: 34, id: '152396'},
   ]);
-  const [boVisibility, setBoVisibility] = useState(true);
+
   const [time, setTime] = useState(1);
   const barChartRef = useRef<EChartsInstance>(null);
 
@@ -43,7 +43,7 @@ const Home = ({ rate = 3500, max = 50, }) => {
     },
     yAxis: {
       max: 'dataMax', // 用数据的最大值作为 Y 轴最大值
-      show: false, // TODO
+      show: false,
     },
     series: [
       {
@@ -113,15 +113,11 @@ const Home = ({ rate = 3500, max = 50, }) => {
 
   return (
     <div
-      className="container mx-auto mt-18 max-w-screen-xl flex flex-col justify-between items-center gap-9"
+      className="container mx-auto my-20 max-w-screen-xl flex flex-col justify-between items-center gap-9"
     >
-      {
-        boVisibility && (
-          <div className="rounded-lg mt-12">
-            <BusinessOverview />
-          </div>
-        )
-      }
+      <div className="rounded-lg mt-12">
+        <BusinessOverview />
+      </div>
       <div>
         <div className={'text-blue-800 text-4xl font-extrabold'}>
           Ethereum Lite Explorer

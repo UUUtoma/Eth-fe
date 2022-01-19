@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+# 区块链赋能供应链系统前端 DEMO
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## dependency
+
+1. node
+2. yarn
+
+## 运行方法
+
+1. 执行命令行指令安装依赖
+```bash
+yarn
+```
+
+2. 运行项目
+```bash
+yarn start
+```
 
 ## Available Scripts
 

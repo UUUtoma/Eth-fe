@@ -1,31 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import ReactFlow, { Handle } from 'react-flow-renderer';
+import ReactFlow, {Handle, Position} from 'react-flow-renderer';
 import {
   IconArchive,
   IconCompass,
   IconDashboard,
-  IconStorage,
   IconIdcard,
   IconRobotAdd,
-  IconShake
+  IconShake,
+  IconStorage
 } from "@arco-design/web-react/icon";
 import CustomEdge from "@/pages/home/components/CustomEdge";
 
-const node1 = ({ data }) => {
+const node1 = ({ data }: any) => {
   const { leftTarget = true, topTarget = false, rightSource = true, colorMap = '', targetBg = 'rgba(255, 255, 255, 0.7)', sourceBg = 'rgba(255, 255, 255, 0.7)'} = data;
-  const classChoice = 'grid justify-center content-center w-10 h-10 rounded-lg bg-gradient-to-b' + ' ' + colorMap;
+  const classChoice = 'grid justify-center content-center w-10 h-10 rounded-lg bg-gradient-to-b ' + colorMap;
 
   // TODO: Handle id
   return (
     <>
       {
         leftTarget && (
-          <Handle type="target" position="left" style={{background: targetBg, borderColor: 'rgb(200, 200, 200)'}}/>
+          <Handle type="target" position={Position.Left} style={{background: targetBg, borderColor: 'rgb(200, 200, 200)'}}/>
         )
       }
       {
         topTarget && (
-          <Handle type="target" position="top" style={{background: targetBg, borderColor: 'rgb(200, 200, 200)'}} />
+          <Handle type="target" position={Position.Top} style={{background: targetBg, borderColor: 'rgb(200, 200, 200)'}} />
         )
       }
       <div
@@ -39,7 +39,7 @@ const node1 = ({ data }) => {
         rightSource && (
           <Handle
             type="source"
-            position="right"
+            position={Position.Right}
             style={{ background: sourceBg, borderColor: 'rgb(200, 200, 200)' }}
           />
         )
@@ -66,6 +66,7 @@ const gradientColorMap = {
 
 export default () => {
   const [animated, setAnimated] = useState(true);
+  const [editable] = useState(false);
   const elements = [
     {
       id: '1',
@@ -160,6 +161,15 @@ export default () => {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         style={{background: 'rgba(30, 37, 56, 0.95)'}}
+        nodesDraggable={editable}
+        nodesConnectable={editable}
+        elementsSelectable={editable}
+        zoomOnScroll={editable}
+        zoomOnPinch={editable}
+        zoomOnDoubleClick={editable}
+        panOnScroll={editable}
+        selectNodesOnDrag={editable}
+        paneMoveable={editable}
       >
       </ReactFlow>
     </div>
